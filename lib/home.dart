@@ -14,6 +14,12 @@ class _HomePageState extends State<Home> {
     setState(() {
       _selectedIndex = index;
     });
+
+    if (index == 1) {
+      Navigator.pushNamed(context, "/discover");
+    } else if (index == 2) {
+      Navigator.pushNamed(context, "/rewards");
+    }
   }
 
   @override
@@ -21,15 +27,15 @@ class _HomePageState extends State<Home> {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          "Xy FootBall",
+          "XY FootBall",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
@@ -40,14 +46,26 @@ class _HomePageState extends State<Home> {
             icon: const Icon(Icons.notifications, color: Colors.white),
           ),
         ],
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF000000),
+                Color(0xFF362301),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.transparent,
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF0D47A1),
-              Color(0xFF1976D2),
-              Color(0xFF42A5F5),
+              Color(0xFF362301),
+              Color(0xFF000000),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -57,27 +75,19 @@ class _HomePageState extends State<Home> {
           padding: const EdgeInsets.all(16),
           children: [
             _buildFeaturedMatch(),
-
             const SizedBox(height: 20),
-
             _buildSectionTitle("نشاهد هذا الأسبوع"),
             const SizedBox(height: 10),
             _buildHorizontalList(),
-
             const SizedBox(height: 20),
-
             _buildSectionTitle("المباريات المباشرة"),
             const SizedBox(height: 10),
             _buildHorizontalList(),
-
             const SizedBox(height: 20),
-
             _buildSectionTitle("أهم اللقطات"),
             const SizedBox(height: 10),
             _buildHorizontalList(),
-
             const SizedBox(height: 20),
-
             _buildSectionTitle("المباريات القادمة"),
             const SizedBox(height: 10),
             _buildVerticalList(),
@@ -85,16 +95,16 @@ class _HomePageState extends State<Home> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black.withOpacity(0.8),
+        backgroundColor: Colors.black.withOpacity(0.85),
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blueAccent,
+        selectedItemColor: const Color(0xFFFF7A00),
         unselectedItemColor: Colors.white70,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "الرئيسية"),
-          BottomNavigationBarItem(icon: Icon(Icons.sports_soccer), label: "المباريات"),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: "الإشعارات"),
+          BottomNavigationBarItem(icon: Icon(Icons.explore), label: "اكتشف"),
+          BottomNavigationBarItem(icon: Icon(Icons.emoji_events), label: "الجوائز"),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: "الإعدادات"),
         ],
       ),
@@ -118,9 +128,9 @@ class _HomePageState extends State<Home> {
         ),
         child: const Center(
           child: Text(
-            "🏆 مباراة القمة",
+            "ليفربول 🆚 ميلان",
             style: TextStyle(
-              fontSize: 24,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
@@ -136,7 +146,7 @@ class _HomePageState extends State<Home> {
       style: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: Color(0xFFFF7A00),
       ),
     );
   }
@@ -152,7 +162,6 @@ class _HomePageState extends State<Home> {
             width: 140,
             margin: const EdgeInsets.only(right: 12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
               image: const DecorationImage(
                 image: AssetImage("assets/match.jpg"),
@@ -172,7 +181,7 @@ class _HomePageState extends State<Home> {
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.white.withOpacity(0.08),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -184,7 +193,7 @@ class _HomePageState extends State<Home> {
               const SizedBox(width: 12),
               const Expanded(
                 child: Text(
-                  "Team A 🆚 Team B",
+                  "الفريق الأول  🆚 الفريق الثاني ",
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
